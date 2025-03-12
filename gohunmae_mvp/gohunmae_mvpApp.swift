@@ -11,7 +11,7 @@ import SwiftUI
 struct gohunmae_mvpApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TimeView()
         }
     }
 }
