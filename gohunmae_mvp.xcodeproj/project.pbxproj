@@ -8,14 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		DB8670B02D7E6CD4002CECB7 /* gohunmae_mvpApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8670AF2D7E6CD4002CECB7 /* gohunmae_mvpApp.swift */; };
-		DB8670B22D7E6CD4002CECB7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8670B12D7E6CD4002CECB7 /* ContentView.swift */; };
+		DB8670B22D7E6CD4002CECB7 /* TimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8670B12D7E6CD4002CECB7 /* TimeView.swift */; };
 		DB8670B42D7E6CD9002CECB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB8670B32D7E6CD9002CECB7 /* Assets.xcassets */; };
 		DB8670B72D7E6CD9002CECB7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB8670B62D7E6CD9002CECB7 /* Preview Assets.xcassets */; };
 		DB8670C12D7E6CD9002CECB7 /* gohunmae_mvpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8670C02D7E6CD9002CECB7 /* gohunmae_mvpTests.swift */; };
 		DB8670CB2D7E6CD9002CECB7 /* gohunmae_mvpUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8670CA2D7E6CD9002CECB7 /* gohunmae_mvpUITests.swift */; };
 		DB8670CD2D7E6CD9002CECB7 /* gohunmae_mvpUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8670CC2D7E6CD9002CECB7 /* gohunmae_mvpUITestsLaunchTests.swift */; };
 		DB8670DA2D8157F4002CECB7 /* TimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8670D92D8157F4002CECB7 /* TimeController.swift */; };
-		DB8670DC2D815812002CECB7 /* TimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8670DB2D815812002CECB7 /* TimeModel.swift */; };
+		DB8670DC2D815812002CECB7 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8670DB2D815812002CECB7 /* SettingModel.swift */; };
+		DB8670DF2D8F9792002CECB7 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8670DE2D8F9791002CECB7 /* SettingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +39,7 @@
 /* Begin PBXFileReference section */
 		DB8670AC2D7E6CD4002CECB7 /* gohunmae_mvp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gohunmae_mvp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB8670AF2D7E6CD4002CECB7 /* gohunmae_mvpApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gohunmae_mvpApp.swift; sourceTree = "<group>"; };
-		DB8670B12D7E6CD4002CECB7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DB8670B12D7E6CD4002CECB7 /* TimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeView.swift; sourceTree = "<group>"; };
 		DB8670B32D7E6CD9002CECB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB8670B62D7E6CD9002CECB7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DB8670BC2D7E6CD9002CECB7 /* gohunmae_mvpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gohunmae_mvpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,7 +48,8 @@
 		DB8670CA2D7E6CD9002CECB7 /* gohunmae_mvpUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gohunmae_mvpUITests.swift; sourceTree = "<group>"; };
 		DB8670CC2D7E6CD9002CECB7 /* gohunmae_mvpUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gohunmae_mvpUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DB8670D92D8157F4002CECB7 /* TimeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeController.swift; sourceTree = "<group>"; };
-		DB8670DB2D815812002CECB7 /* TimeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeModel.swift; sourceTree = "<group>"; };
+		DB8670DB2D815812002CECB7 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
+		DB8670DE2D8F9791002CECB7 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,11 +101,11 @@
 			isa = PBXGroup;
 			children = (
 				DB8670AF2D7E6CD4002CECB7 /* gohunmae_mvpApp.swift */,
-				DB8670B12D7E6CD4002CECB7 /* ContentView.swift */,
+				DB8670DD2D8F9776002CECB7 /* Time */,
 				DB8670B32D7E6CD9002CECB7 /* Assets.xcassets */,
 				DB8670B52D7E6CD9002CECB7 /* Preview Content */,
-				DB8670D92D8157F4002CECB7 /* TimeController.swift */,
-				DB8670DB2D815812002CECB7 /* TimeModel.swift */,
+				DB8670DE2D8F9791002CECB7 /* SettingView.swift */,
+				DB8670DB2D815812002CECB7 /* SettingModel.swift */,
 			);
 			path = gohunmae_mvp;
 			sourceTree = "<group>";
@@ -131,6 +133,15 @@
 				DB8670CC2D7E6CD9002CECB7 /* gohunmae_mvpUITestsLaunchTests.swift */,
 			);
 			path = gohunmae_mvpUITests;
+			sourceTree = "<group>";
+		};
+		DB8670DD2D8F9776002CECB7 /* Time */ = {
+			isa = PBXGroup;
+			children = (
+				DB8670D92D8157F4002CECB7 /* TimeController.swift */,
+				DB8670B12D7E6CD4002CECB7 /* TimeView.swift */,
+			);
+			path = Time;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,9 +274,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB8670B22D7E6CD4002CECB7 /* ContentView.swift in Sources */,
+				DB8670B22D7E6CD4002CECB7 /* TimeView.swift in Sources */,
+				DB8670DF2D8F9792002CECB7 /* SettingView.swift in Sources */,
 				DB8670B02D7E6CD4002CECB7 /* gohunmae_mvpApp.swift in Sources */,
-				DB8670DC2D815812002CECB7 /* TimeModel.swift in Sources */,
+				DB8670DC2D815812002CECB7 /* SettingModel.swift in Sources */,
 				DB8670DA2D8157F4002CECB7 /* TimeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
