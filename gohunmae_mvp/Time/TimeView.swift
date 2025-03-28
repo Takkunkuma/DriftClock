@@ -21,24 +21,37 @@ struct TimeView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                Spacer()
                 Text(timeString)
-                    .font(.system(size: 54, weight: .bold))
+                    .font(.system(size: 68, weight: .bold))
                     .onReceive(timer){ timeNow in
                         let futureDate = timeNow.addingTimeInterval(Double(delay)! * 60) // Add 5 seconds
                         timeString = timeController.getTimeString(date: futureDate)
                     }
-                
+                Spacer()
                 Picker("Choose Time to Delay", selection: $delay) {
                     ForEach(timeController.getTimeChoices(), id: \.self) {
                         Text($0.description)
                     }
                 }
                 .pickerStyle(.wheel)
-                
-                NavigationLink(destination: SettingView(), isActive: $isShowingTimeView ) {
-                    Image(systemName: "gear")
-                        .foregroundStyle(Color(UIColor(named: "IconColor")!))
-                }
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Text("Start!")
+                        .font(.title)
+                        .bold()
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity) // Makes the button stretch horizontally
+                        .padding()
+                        .background(Color.black)
+                        .cornerRadius(15)
+                })
+                .padding(.horizontal, 40)
+                .shadow(color: .gray.opacity(0.6), radius: 5, x: 0, y: 5)
+//                NavigationLink(destination: SettingView(), isActive: $isShowingTimeView ) {
+//                    Image(systemName: "gear")
+//                        .foregroundStyle(Color(UIColor(named: "IconColor")!))
+//                }
+                Spacer()
                 
             }
             .padding()
