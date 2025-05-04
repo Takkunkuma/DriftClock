@@ -9,7 +9,7 @@ import Foundation
 
 class TimeController {
     
-    private let time = ["0", "1", "5", "10"]
+    private let time = ["0", "1", "5", "10", "20", "30"]
     
     func getTimeChoices() -> Array<String> {
         return time
