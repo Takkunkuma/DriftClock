@@ -10,13 +10,12 @@ import SwiftUI
 var timeController = TimeController()
 
 struct TimeView: View {
-    @Environment(\.colorScheme) var colorScheme
     
-    @State private var timePostUpdate = timeController.getTimeString(date: Date())
-    @State private var timeBeforeUpdate =
-        timeController.getTimeString(date: Date())
+    @State private var timePostUpdate = ""
+    @State private var timeBeforeUpdate = ""
     
     @State private var delay: String = "0"
+    @State private var selectedFormat: TimeFormat = .twelveHour
     @State private var previousPick: String = "0"
     @State private var rotationAngle: Double = 180
     
@@ -31,16 +30,34 @@ struct TimeView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                Picker("Pick format",
+                      selection: $selectedFormat) {
+                    ForEach(timeController.getFormatOptions(),
+                                   id: \.self) {
+                        Text($0.description)
+                           }
+                     }
+                      .pickerStyle(.menu)
+                      .onChange(of: selectedFormat) { oldValue, newFormat in
+                          let now = Date()
+                          let futureDate = timeController.getAdjustedTime(from: now, delay: delay)
+                          let previousDate = timeController.getAdjustedTime(from: now, delay: previousPick)
+
+                          timePostUpdate = timeController.getFormattedTime(for: futureDate, using: newFormat)
+                          timeBeforeUpdate = timeController.getFormattedTime(for: previousDate, using: newFormat)
+                      }
                 Spacer()
                 
                 ZStack(alignment: .center){
+                    
                     Text(timePostUpdate)
                         .font(.system(size: 68, weight: .bold))
                         .onReceive(timer){ timeNow in
-                            let futureDate = timeNow.addingTimeInterval(Double(delay)! * 60) // Add 5 seconds
-                            timePostUpdate = timeController.getTimeString(date: futureDate)
+                            let futureDate = timeController.getAdjustedTime(from: timeNow, delay: delay)
+                            timePostUpdate = timeController.getFormattedTime(for: futureDate, using: selectedFormat)
                         }
                         .padding(.bottom, 100)
+                    
                     Text(timeBeforeUpdate)
                         .font(.system(size: 68, weight: .bold))
                         .foregroundColor(isPicking ? .gray : .black)
@@ -49,8 +66,8 @@ struct TimeView: View {
                         .offset(y: isPicking ? -75 : 0)
                         .animation(.easeInOut(duration: 0.5), value: isPicking)
                         .onReceive(timer){timeNow in
-                            let previousTime = timeNow.addingTimeInterval(Double(previousPick)! * 60)
-                            timeBeforeUpdate = timeController.getTimeString(date: previousTime)
+                            let previousTime = timeController.getAdjustedTime(from: timeNow, delay: previousPick)
+                            timePostUpdate = timeController.getFormattedTime(for: previousTime, using: selectedFormat)
                         }
                         .padding(.bottom, 100)
                     }
@@ -116,6 +133,12 @@ struct TimeView: View {
                 .offset(y: isSlidDown ? 260 : 0) // <-- Move it down when toggled
                 .animation(.easeInOut, value: isSlidDown)
             }
+        }
+        .onAppear {
+            // Set initial times
+            let now = Date()
+            timePostUpdate = timeController.getFormattedTime(for: timeController.getAdjustedTime(from: now, delay: delay), using: selectedFormat)
+            timeBeforeUpdate = timeController.getFormattedTime(for: timeController.getAdjustedTime(from: now, delay: previousPick), using: selectedFormat)
         }
     }
 }

@@ -7,22 +7,48 @@
 
 import Foundation
 
+enum TimeFormat: String, CaseIterable, Identifiable {
+    case twelveHour = "h:mm a"
+    case twentyFourHour = "HH:mm"
+
+    var id: String { self.rawValue }
+
+    var description: String {
+        switch self {
+        case .twelveHour: return "12-hour"
+        case .twentyFourHour: return "24-hour"
+        }
+    }
+
+    var formatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = self.rawValue
+        return formatter
+    }
+}
+
 class TimeController {
     
-    private let time = ["0", "1", "5", "10", "20", "30"]
+    private let delayOptions = ["0", "1", "5", "10", "20", "30"]
+    let twelveHourFormat = "h:mm a"
+    let twentyFourHourFormat = "HH:mm:ss"
+
     
-    func getTimeChoices() -> Array<String> {
-        return time
+    func getTimeChoices() -> [String] {
+        return delayOptions
     }
     
-    func getTimeString(date: Date) -> String {
-        getTimeFormatter().string(from: date)
+    func getFormatOptions() -> [TimeFormat] {
+            return TimeFormat.allCases
+        }
+    
+    func getFormattedTime(for date: Date, using format: TimeFormat) -> String {
+        return format.formatter.string(from: date)
     }
     
-    func getTimeFormatter() -> DateFormatter {
-        let formatter = DateFormatter()
-            formatter.dateFormat = "HH:mm:ss"
-            return formatter
+    func getAdjustedTime(from date: Date, delay: String) -> Date {
+        guard let delayMinutes = Double(delay) else { return date }
+        return date.addingTimeInterval(delayMinutes * 60)
     }
 
 }
