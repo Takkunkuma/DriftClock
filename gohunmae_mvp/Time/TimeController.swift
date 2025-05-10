@@ -48,7 +48,8 @@ class TimeController {
     
     func getAdjustedTime(from date: Date, delay: String) -> Date {
         guard let delayMinutes = Double(delay) else { return date }
-        return date.addingTimeInterval(delayMinutes * 60)
+        let date = date.addingTimeInterval(delayMinutes * 60)
+        return date
     }
 
 }

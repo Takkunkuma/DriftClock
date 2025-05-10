@@ -22,6 +22,8 @@ struct TimeView: View {
     @State private var isShowingTimeView = true
     @State private var isSlidDown = true
     @State private var isPicking = false
+    @State private var showPopOver = false
+
     
     private var timer = Timer.publish(every: 1, tolerance: 0.2, on: .main, in: .common)
         .autoconnect()
@@ -30,22 +32,33 @@ struct TimeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Picker("Pick format",
-                      selection: $selectedFormat) {
-                    ForEach(timeController.getFormatOptions(),
-                                   id: \.self) {
-                        Text($0.description)
+                HStack {
+                    Button(action: {
+                        showPopOver = true
+                    }) {
+                        Image(systemName: "info.circle")
+                    }
+                    .popover(isPresented: $showPopOver) {
+                        InfoPopupView()
+                    }
+                    Picker("Pick format",
+                           selection: $selectedFormat) {
+                        ForEach(timeController.getFormatOptions(),
+                                id: \.self) {
+                            Text($0.description)
+                        }
+                    }
+                           .pickerStyle(.menu)
+                           .onChange(of: selectedFormat) { oldValue, newFormat in
+                               let now = Date()
+                               let futureDate = timeController.getAdjustedTime(from: now, delay: delay)
+                               let previousDate = timeController.getAdjustedTime(from: now, delay: previousPick)
+                               
+                               timePostUpdate = timeController.getFormattedTime(for: futureDate, using: newFormat)
+                               timeBeforeUpdate = timeController.getFormattedTime(for: previousDate, using: newFormat)
                            }
-                     }
-                      .pickerStyle(.menu)
-                      .onChange(of: selectedFormat) { oldValue, newFormat in
-                          let now = Date()
-                          let futureDate = timeController.getAdjustedTime(from: now, delay: delay)
-                          let previousDate = timeController.getAdjustedTime(from: now, delay: previousPick)
-
-                          timePostUpdate = timeController.getFormattedTime(for: futureDate, using: newFormat)
-                          timeBeforeUpdate = timeController.getFormattedTime(for: previousDate, using: newFormat)
-                      }
+                }
+                
                 Spacer()
                 
                 ZStack(alignment: .center){
@@ -54,6 +67,7 @@ struct TimeView: View {
                         .font(.system(size: 68, weight: .bold))
                         .onReceive(timer){ timeNow in
                             let futureDate = timeController.getAdjustedTime(from: timeNow, delay: delay)
+                            print("futureDate\(futureDate)")
                             timePostUpdate = timeController.getFormattedTime(for: futureDate, using: selectedFormat)
                         }
                         .padding(.bottom, 100)
@@ -67,7 +81,8 @@ struct TimeView: View {
                         .animation(.easeInOut(duration: 0.5), value: isPicking)
                         .onReceive(timer){timeNow in
                             let previousTime = timeController.getAdjustedTime(from: timeNow, delay: previousPick)
-                            timePostUpdate = timeController.getFormattedTime(for: previousTime, using: selectedFormat)
+                            print("previousTime\(previousTime)")
+                            timeBeforeUpdate = timeController.getFormattedTime(for: previousTime, using: selectedFormat)
                         }
                         .padding(.bottom, 100)
                     }
@@ -117,6 +132,7 @@ struct TimeView: View {
                     Button(action: {
                         withAnimation {
                             isSlidDown.toggle()
+                            isPicking.toggle()
                             rotationAngle -= 180
                         }
                     })
